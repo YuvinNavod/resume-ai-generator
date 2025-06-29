@@ -1,14 +1,7 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 
-
-class NameEntry(BaseModel):
-    name: str
-
-class UrlEntry(BaseModel):
-    url: str
-
-class ExperienceEntry(BaseModel):
+class Experience(BaseModel):
     job_title: str
     company: str
     from_month: str
@@ -17,6 +10,15 @@ class ExperienceEntry(BaseModel):
     to_year: str
     details: str
 
+class Degree(BaseModel):
+    degree: str
+
+class NamedItem(BaseModel):
+    name: str
+
+class Link(BaseModel):
+    url: str
+
 class ResumeRequest(BaseModel):
     name: str
     title: str
@@ -24,17 +26,13 @@ class ResumeRequest(BaseModel):
     phone: str
     email: str
     address: str
-    linkedin: str
-    github: str
-    experience: List[ExperienceEntry]
-    education: List[dict]
-    technical_skills: List[NameEntry]
-    soft_skills: List[NameEntry]
-    certifications: List[dict]
-    projects: List[dict]
-    languages: List[dict]
-    links: List[UrlEntry]
-
-
-
-    
+    linkedin: Optional[str] = None
+    github: Optional[str] = None
+    experience: List[Experience]
+    education: List[Degree]
+    technical_skills: List[NamedItem]
+    soft_skills: List[NamedItem]
+    certifications: List[NamedItem]
+    projects: List[NamedItem]
+    languages: List[NamedItem]
+    links: List[Link]

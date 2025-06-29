@@ -34,29 +34,37 @@ def create_resume(data) -> dict:
         doc.add_paragraph(f"• {edu}")
 
     # === Technical Skills ===
-    doc.add_heading("Technical Skills", level=1)
-    doc.add_paragraph(", ".join(data.technical_skills))
+    if data.technical_skills:
+        doc.add_heading("Technical Skills", level=1)
+        doc.add_paragraph(", ".join(skill.name for skill in data.technical_skills))
 
     # === Soft Skills ===
-    doc.add_heading("Soft Skills", level=1)
-    doc.add_paragraph(", ".join(data.soft_skills))
+    if data.soft_skills:        
+        doc.add_heading("Soft Skills", level=1)
+        doc.add_paragraph(", ".join(skill.name for skill in data.soft_skills))
 
     # === Certifications ===
     if data.certifications:
         doc.add_heading("Certifications", level=1)
         for cert in data.certifications:
-            doc.add_paragraph(f"• {cert}")
+            doc.add_paragraph(f"• {cert.name}")
 
     # === Projects ===
     if data.projects:
         doc.add_heading("Projects", level=1)
         for project in data.projects:
-            doc.add_paragraph(f"• {project}")
+            doc.add_paragraph(f"• {project.name}")
 
     # === Languages ===
     if data.languages:
         doc.add_heading("Languages", level=1)
-        doc.add_paragraph(", ".join(data.languages))
+        doc.add_paragraph(", ".join(lang.name for lang in data.languages))
+
+    # === Additional Links ===
+    if data.links:
+        doc.add_heading("Additional Links", level=1)
+        for link in data.links:
+            doc.add_paragraph(link.url)
 
     # === Save Resume ===
     os.makedirs("static", exist_ok=True)
