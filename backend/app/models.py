@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr, HttpUrl, constr, Field    
 from typing import List, Optional
 
 class Experience(BaseModel):
